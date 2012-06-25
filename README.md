@@ -11,19 +11,19 @@ Threadz is mobile networking application. It allows users to create contacts gro
 
 ## RULES
 
-### User
+### user
 -   A user can create as many threads as he wishes.
 -   A user can look for an existing thread.
 -   A user can subscribe to an existing thread.
 -   A user can list contact attached to an existing thread.
 
-### Admin
+### admin
 -   The creator of a thread is the admin of the thread.
 -   An admin can attach contacts to a thread.
 -   An admin can dettach contacts from a thread.
 -   An admin can accept/decline contact subscription request.
 
-### Thread
+### thread
 -   Each message is readable by every contacts attached to a thread.
 
 
@@ -65,3 +65,31 @@ Threadz is mobile networking application. It allows users to create contacts gro
         -   Search (type: list, route: #menu/search)
         -   Detail (type: panel)
         -   Create (type: form, route: #menu/create)
+
+## DB Schemas
+
+### user
+-   id (Int, primary key)
+-   email (Varchar)
+-   password (Varchar)
+-   creationDate (Date)
+
+### thread
+-   id (Int, primary key)
+-   name (Varchar)
+-   userId (Varchar, foreign key)
+-   creationDate (Date)
+
+### message
+-   id (Int, primary key)
+-   threadId (Int, foreign key)
+-   userId (Int, foreign key)
+-   text (Text)
+-   creationDate (Date)
+
+### userThreads
+-   userId (Int, foreign key)
+-   threadId (Int, foreign key)
+-   creationDate (Date)
+-   isGranted (TinyInt)
+-   isAdmin (TinyInt)
