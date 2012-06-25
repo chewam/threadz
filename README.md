@@ -72,11 +72,13 @@ Threadz is mobile networking application. It allows users to create contacts gro
 -   id (Int, primary key)
 -   email (Varchar)
 -   password (Varchar)
+-   picture (Varchar)
 -   creationDate (Date)
 
 ### thread
 -   id (Int, primary key)
 -   name (Varchar)
+-   picture (Varchar)
 -   userId (Varchar, foreign key)
 -   creationDate (Date)
 
@@ -86,6 +88,13 @@ Threadz is mobile networking application. It allows users to create contacts gro
 -   userId (Int, foreign key)
 -   text (Text)
 -   creationDate (Date)
+
+### alerts
+-   id (Int, primary key)
+-   type (String)
+-   threadId (Int, foreign key)
+-   emitterId (Int, foreign key)
+-   recieverId (Int, foreign key)
 
 ### userThreads
 -   userId (Int, foreign key)
