@@ -1,8 +1,8 @@
-# threadz
+# THREADZ
 
 mobile networking application
 
-## api
+## API
 
 ### user
 -   POST /api/user/login (String login, String password)
@@ -22,3 +22,21 @@ mobile networking application
 -   GET /api/thread/user (String id)
 -   PUT /api/thread/user (String id, String userId)
 -   DELETE /api/thread/user (String id, String userId)
+
+## App layouts & views
+-   Viewport (layout: card)
+    -   User (layout: card)
+        -   Login (type: form, route: #login)
+        -   Register (type: form, route: #register)
+    -   Navigation (layout: navigation)
+        -   Threads (type: list, route: #threads)
+        -   Messages (type: dataview, route: #thread/:id/messages)
+        -   Messenger (type: form, route: #thread/:id/messenger)
+        -   Users (layout: card)
+            -   ListUsers (type: list, route: #thread/:id/users)
+            -   AddUsers (type: list)
+    -   Menu (layout: navigation)
+        -   Actions (type: panel, route: #menu)
+        -   Search (type: list, route: #menu/search)
+        -   Detail (type: panel)
+        -   Create (type: form, route: #menu/create)
