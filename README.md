@@ -1,6 +1,31 @@
 # THREADZ
 
-mobile networking application
+Threadz is mobile networking application. It allows users to create contacts groups and broadcast messages to everyone in a group.
+
+## SCENARIO
+1. A user installs the application.
+2. He creates an account.
+3. He creates a thread.
+4. He adds contacts to this thread.
+5. He sends/recieves messages to/from this thread.
+
+## RULES
+
+### User
+-   A user can create as many threads as he wishes.
+-   A user can look for an existing thread.
+-   A user can subscribe to an existing thread.
+-   A user can list contact attached to an existing thread.
+
+### Admin
+-   The creator of a thread is the admin of the thread.
+-   An admin can attach contacts to a thread.
+-   An admin can dettach contacts from a thread.
+-   An admin can accept/decline contact subscription request.
+
+### Thread
+-   Each message is readable by every contacts attached to a thread.
+
 
 ## API
 
@@ -23,7 +48,7 @@ mobile networking application
 -   PUT /api/thread/user (String id, String userId)
 -   DELETE /api/thread/user (String id, String userId)
 
-## App layouts & views
+## APP layouts, views & routes
 -   Viewport (layout: card)
     -   User (layout: card)
         -   Login (type: form, route: #login)
