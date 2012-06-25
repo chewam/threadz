@@ -5,8 +5,9 @@ mobile networking application
 ## api
 
 ### user
--   /api/user/login (String login, String password)
--   /api/user/logout ()
+-   POST /api/user/login (String login, String password)
+-   GET /api/user/logout ()
+-   PUT /api/user (String email, String password)
 
 ### thread
 -   GET /api/thread ([Int start], [Int limit])
