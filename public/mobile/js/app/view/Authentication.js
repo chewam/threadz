@@ -11,11 +11,6 @@ Ext.define('Tz.view.Authentication', {
 
     config: {
         layout: 'card'
-        // items: [{
-        //     xtype: 'tz_authentication_login'
-        // }, {
-        //     xtype: 'tz_authentication_register'
-        // }]
     }
 
 });

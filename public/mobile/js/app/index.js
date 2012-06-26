@@ -17,13 +17,26 @@ Ext.application({
 
     requires: [
         'Tz.utils.Io',
-        'Tz.utils.Config'
-        // 'JB.utils.Templates'
+        'Tz.utils.Config',
+        'Tz.utils.Templates'
+    ],
+
+    models: [
+        'User',
+        'Thread',
+        'Message'
+    ],
+
+    stores: [
+        'Threads',
+        'Messages'
     ],
 
     controllers: [
         'Main',
         'Threads',
+        'Messages',
+        'Messenger',
         'Navigation',
         'Authentication'
     ]

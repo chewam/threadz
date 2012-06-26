@@ -3,9 +3,6 @@ Ext.define('Tz.controller.Main', {
     extend: 'Ext.app.Controller',
 
     config: {
-        // views: [],
-        models: ['User'],
-        // stores: ['Users'],
         refs: {
             authenticationPanel: {
                 autoCreate: true,
@@ -26,7 +23,6 @@ Ext.define('Tz.controller.Main', {
         },
         routes: {
             '': 'showNavigation'
-            // 'authentication': 'showAuthentication'
         }
     },
 
@@ -46,13 +42,5 @@ Ext.define('Tz.controller.Main', {
         Ext.Viewport.add(navigationPanel);
         Ext.Viewport.setActiveItem(navigationPanel);
     }
-
-    // showAuthentication: function() {
-    //     console.log('showAuthentication');
-    //     var authenticationPanel = this.getAuthenticationPanel();
-
-    //     Ext.Viewport.add(authenticationPanel);
-    //     Ext.Viewport.setActiveItem(authenticationPanel);
-    // }
 
 });

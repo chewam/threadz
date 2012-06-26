@@ -5,7 +5,7 @@ function User() {}
 User.prototype.login = function(req, res) {
     var user,
         data = req.body,
-        query = 'SELECT email, password FROM users';
+        query = 'SELECT id, email, password FROM users';
 
     if (data.login && data.password && data.login.length && data.password.length) {
         db.query(query, function(error, result) {
@@ -13,7 +13,8 @@ User.prototype.login = function(req, res) {
             for (var i = 0, l = result.length; i < l; i++) {
                 user = result[i];
                 if (user.email === data.login && user.password === data.password) {
-                    req.session.email = user.email;
+                    delete user.password;
+                    req.session.user = user;
                     res.json({success: true});
                     return;
                 }
@@ -58,6 +59,9 @@ User.prototype.register = function(req, res) {
             };
             db.query(query, user, function(error, result) {
                 if (error) throw error;
+                delete user.password;
+                user.id = result.insertId;
+                req.session.user = user;
                 res.json({
                     success: true
                 });

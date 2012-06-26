@@ -5,10 +5,13 @@ Ext.define('Tz.controller.Threads', {
     config: {
         views: ['Threads'],
         refs: {
-            
+            threadsPanel: 'tz_navigation tz_threads'
         },
         control: {
-
+            threadsPanel: {
+                itemtap: 'onThreadsPanelItemTap',
+                activate: 'onThreadsPanelActivate'
+            }
         },
         before: {
 
@@ -16,6 +19,19 @@ Ext.define('Tz.controller.Threads', {
         routes: {
 
         }
+    },
+
+    onThreadsPanelActivate: function(panel) {
+        var store = panel.getStore();
+
+        store.load();
+    },
+
+    onThreadsPanelItemTap: function(list, index, target, record) {
+        var id = record.get('id'),
+            route = 'threads/' + id;
+
+        this.redirectTo(route);
     }
 
 });

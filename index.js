@@ -36,11 +36,13 @@ app.configure('production', function() {
 
 // Routes
 
-// API
+// API user
 app.post('/api/user/login', routes.api.user.login);
 app.post('/api/user/register', routes.api.user.register);
 app.get('/api/user/logout', routes.api.user.logout);
-// app.get('/api/threads/:id', routes.api.threads.get);
+
+// API threads
+app.get('/api/threads/:id/messages', routes.api.threads.messages);
 app.get('/api/threads', routes.api.checkSession, routes.api.threads.list);
 
 // WEB SITE

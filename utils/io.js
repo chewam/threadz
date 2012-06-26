@@ -19,12 +19,10 @@ Io.prototype.init = function(app, store) {
 };
 
 Io.prototype.onConnect = function(socket) {
-    console.log('onConnect', socket.handshake.session.email);
-    this.sockets[socket.handshake.session.email] = socket;
+    this.sockets[socket.handshake.session.user.id] = socket;
 };
 
 Io.prototype.checkAuthorization = function(data, accept) {
-    console.log('checkAuthorization');
     if (data.headers.cookie) {
         data.cookie = this.parseCookie(data.headers.cookie);
         data.sessionID = data.cookie['threadz.sid'];
@@ -43,7 +41,7 @@ Io.prototype.checkAuthorization = function(data, accept) {
 
 Io.prototype.getSession = function(id, callback) {
     this.store.get(id, function (err, session) {
-        if (err || !session || !session.email) {
+        if (err || !session || !session.user) {
             callback.call(this, false);
         } else {
             callback.call(this, session);
