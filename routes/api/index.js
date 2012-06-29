@@ -6,6 +6,6 @@ exports.checkSession = function(req, res, next) {
     if (req.session.user) {
         next();
     } else {
-        res.json({success: false, error: 'session doesn\'t exist'});
+        res.send('session doesn\'t exist', {'Content-Type': 'text/plain'}, 403);
     }
 };

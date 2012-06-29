@@ -1,0 +1,21 @@
+@mixin threadz-message() {
+    .tz_messages {
+    
+        .x-list-item-label {
+            display: -webkit-box;
+
+            .date {
+                
+            }
+
+            .info {
+                -webkit-box-flex: 1;
+
+                .name {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

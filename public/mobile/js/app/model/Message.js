@@ -6,9 +6,9 @@ Ext.define('Tz.model.Message', {
         fields: [
             'id',
             'text',
-            'userId',
+            'email',
             'threadId',
-            {name: 'creationDate', type: 'date'}
+            {name: 'creationDate', type: 'date'/*, defaultValue: new Date()*/}
         ]
     }
 

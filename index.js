@@ -22,6 +22,7 @@ app.configure(function() {
     app.use(express.methodOverride());
     app.use(express.cookieParser());
     app.use(express.session({secret: 'threadz', store: sessionStore, key: 'threadz.sid'}));
+    app.use(routes.allowCrossDomain);
     app.use(app.router);
     app.use(express.static(__dirname + '/public'));
 });
@@ -39,11 +40,15 @@ app.configure('production', function() {
 // API user
 app.post('/api/user/login', routes.api.user.login);
 app.post('/api/user/register', routes.api.user.register);
-app.get('/api/user/logout', routes.api.user.logout);
+app.get('/api/user/logout', routes.api.checkSession, routes.api.user.logout);
+app.get('/api/user', routes.api.checkSession, routes.api.user.get);
 
 // API threads
-app.get('/api/threads/:id/messages', routes.api.threads.messages);
-app.get('/api/threads', routes.api.checkSession, routes.api.threads.list);
+app.get('/api/threads/:id/messages', routes.api.threads.messages.get);
+app.post('/api/threads/:id/messages', routes.api.threads.messages.add);
+app.get('/api/threads/search', routes.api.checkSession, routes.api.threads.search);
+app.get('/api/threads', routes.api.checkSession, routes.api.threads.get);
+app.post('/api/threads', routes.api.checkSession, routes.api.threads.add);
 
 // WEB SITE
 app.get('/', routes.site.index);

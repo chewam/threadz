@@ -7,15 +7,11 @@ Ext.define('Tz.utils.Config', {
     mixins: ['Ext.mixin.Observable'],
 
     config: {
-        user: null
+        host: 'http://192.168.1.41:3000'
     },
 
     constructor: function(config) {
         this.initConfig(config);
     }
-
-    // updateUser: function(newUser, oldUser) {
-
-    // }
 
 });

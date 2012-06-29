@@ -8,6 +8,7 @@ Ext.define('Tz.view.Threads', {
         ui: 'round',
         title: 'THREADS',
         store: 'threads',
+        cls: 'tz_threads',
         itemTpl: Tz.utils.Templates.getThreadItem()
     }
 

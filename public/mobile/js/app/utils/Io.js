@@ -8,7 +8,7 @@ Ext.define('Tz.utils.Io', {
 
     config: {
         socket: null,
-        host: 'http://localhost:3000'
+        events: ['message', 'disconnect']
     },
 
     constructor: function(config) {
@@ -16,20 +16,29 @@ Ext.define('Tz.utils.Io', {
     },
 
     connect: function() {
-        var host = this.getHost(),
-            socket = io.connect(host);
+        var host = Tz.utils.Config.getHost(),
+            socket = io.connect(host, {debug: true});
 
         this.setSocket(socket);
+        this.addEvents();
+    },
+
+    disconnect: function() {
+        this.getSocket().disconnect();
+        // this.getSocket().close();
+        // io.close(this.getSocket());
+    },
+
+    addEvents: function() {
+        var events = this.getEvents();
+
+        for (var i = 0, l = events.length; i < l; i++) {
+            this.addEvent(events[i]);
+        }
+    },
+
+    addEvent: function(event) {
+        this.getSocket().on(event, Ext.bind(this.fireEvent, this, [event], 0));
     }
 
-    // updateUser: function(newUser, oldUser) {
-
-    // }
-
 });
-
-  
-  // socket.on('news', function (data) {
-  //   console.log(data);
-  //   socket.emit('my other event', { my: 'data' });
-  // });

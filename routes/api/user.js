@@ -2,6 +2,16 @@ var db = require('../../utils/database');
 
 function User() {}
 
+User.prototype.get = function(req, res) {
+    var id = req.session.user.id,
+        query = 'SELECT email FROM users WHERE id = ?';
+
+    db.query(query, [id], function(error, result) {
+        if (error) throw error;
+        res.json(result);
+    });
+};
+
 User.prototype.login = function(req, res) {
     var user,
         data = req.body,

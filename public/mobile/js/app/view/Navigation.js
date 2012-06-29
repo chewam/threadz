@@ -5,9 +5,21 @@ Ext.define('Tz.view.Navigation', {
     extend: 'Ext.navigation.View',
 
     config: {
-        items: [{
-            xtype: 'tz_threads'
-        }]
+        navigationBar: {
+            items: [{
+                ui: 'plain',
+                align: 'right',
+                xtype: 'button',
+                iconCls: 'settings',
+                iconMask: true,
+                action: 'menu'
+            }]
+        }
+    },
+
+    pop: function() {
+        this.fireEvent('beforepop', this);
+        this.callParent(arguments);
     }
 
 });

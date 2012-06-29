@@ -16,8 +16,11 @@ Ext.application({
     },
 
     requires: [
-        'Tz.utils.Io',
         'Tz.utils.Config',
+        'Tz.utils.Io',
+        'Tz.utils.User',
+        'Tz.utils.Routes',
+        'Tz.utils.Cordova',
         'Tz.utils.Templates'
     ],
 
@@ -35,8 +38,9 @@ Ext.application({
     controllers: [
         'Main',
         'Threads',
+        'threads.Search',
         'Messages',
-        'Messenger',
+        // 'Messenger',
         'Navigation',
         'Authentication'
     ]

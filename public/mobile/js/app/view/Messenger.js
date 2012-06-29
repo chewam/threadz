@@ -8,6 +8,7 @@ Ext.define('Tz.view.Messenger', {
         items: [{
             xtype: 'fieldset',
             items: [{
+                name: 'text',
                 xtype: 'textareafield'
             }]
         }, {
