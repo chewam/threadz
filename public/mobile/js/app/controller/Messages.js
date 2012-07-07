@@ -3,9 +3,15 @@ Ext.define('Tz.controller.Messages', {
     extend: 'Ext.app.Controller',
 
     config: {
-        views: ['Messages', 'Messenger'],
+        views: [
+            'Messages',
+            'Messenger',
+            'messages.Menu'
+            // 'messages.Users'
+        ],
         refs: {
             navigationPanel: 'tz_navigation',
+            usersPanel: 'viewport > tz_messages_users',
             messagesPanel: 'tz_navigation > tz_messages',
             messengerPanel: 'tz_navigation > tz_messenger'
         },
@@ -21,6 +27,12 @@ Ext.define('Tz.controller.Messages', {
             },
             'tz_navigation button[action="menu"]': {
                 tap: 'onMenuButtonTap'
+            },
+            'viewport > tz_messages_menu button[action="users"]': {
+                tap: 'onUsersButtonTap'
+            },
+            'tz_messages_users button[action="close"]': {
+                tap: 'onUsersCloseButtonTap'
             }
         }
     },
@@ -54,6 +66,18 @@ Ext.define('Tz.controller.Messages', {
         }
     },
 
+    showMenu: function() {
+        Ext.Viewport.add({
+            xtype: 'tz_messages_menu'
+        }).show();
+    },
+
+    showUsers: function() {
+        Ext.Viewport.add({
+            xtype: 'tz_messages_users'
+        }).show();
+    },
+
     onSendButtonTap: function() {
         this.send();
     },
@@ -85,21 +109,19 @@ Ext.define('Tz.controller.Messages', {
         var messagesPanel = this.getMessagesPanel();
 
         if (messagesPanel && !messagesPanel.isHidden()) {
-            Ext.Viewport.add({
-                xtype: 'actionsheet',
-                hideOnMaskTap: true,
-                items: [{
-                    text: 'Manage users'
-                }, {
-                    text: 'Thread options'
-                }],
-                listeners: {
-                    hide: function() {
-                        this.destroy();
-                    }
-                }
-            }).show();
+            this.showMenu();
         }
+    },
+
+    onUsersButtonTap: function(button) {
+        button.up('actionsheet').hide();
+        Ext.defer(this.showUsers, 300, this);
+    },
+
+    onUsersCloseButtonTap: function(button) {
+        var usersPanel = this.getUsersPanel();
+
+        usersPanel.hide();
     }
 
 });

@@ -70,12 +70,14 @@ Ext.define('Tz.controller.Threads', {
     },
 
     onThreadsPanelItemTap: function(list, index, target, record) {
-        var id = record.get('id'),
-            route = 'threads/' + id;
+        if (record.get('isGranted')) {
+            var id = record.get('id'),
+                route = 'threads/' + id;
 
-        record.set('unread', 0);
+            record.set('unread', 0);
 
-        this.redirectTo(route);
+            this.redirectTo(route);
+        }
     },
 
     onMessage: function(message) {
@@ -106,12 +108,12 @@ Ext.define('Tz.controller.Threads', {
 
     onCreateThreadButtonTap: function(button) {
         button.up('actionsheet').hide();
-        Ext.defer(this.showThreadForm, this);
+        Ext.defer(this.showThreadForm, 300, this);
     },
 
     onFindThreadButtonTap: function(button) {
         button.up('actionsheet').hide();
-        Ext.defer(this.showThreadSearch, this);
+        Ext.defer(this.showThreadSearch, 300, this);
     },
 
     onFormSubmitButtonTap: function() {
@@ -122,7 +124,7 @@ Ext.define('Tz.controller.Threads', {
 
         store.add(values);
         threadsForm.hide();
-        // store.sync();
+        store.sync();
     },
 
     onFormCloseButtonTap: function() {

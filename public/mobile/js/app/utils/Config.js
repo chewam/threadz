@@ -7,6 +7,7 @@ Ext.define('Tz.utils.Config', {
     mixins: ['Ext.mixin.Observable'],
 
     config: {
+        // host: 'http://threadz.localhost:3000'
         host: 'http://192.168.1.41:3000'
     },
 

@@ -2,6 +2,8 @@ exports.site = require('./site');
 
 exports.api = require('./api');
 
+exports.app = require('./app');
+
 exports.allowCrossDomain = function(req, res, next) {
     var origin = req.headers.origin || '*';
 

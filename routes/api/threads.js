@@ -1,6 +1,8 @@
-var db = require('../../utils/database');
+var db = require('../../utils/database'),
+    api = require('../../utils/api');
 
 function Threads() {
+    this.users = require('./users');
     this.messages = require('./messages');
 }
 
@@ -16,6 +18,9 @@ Threads.prototype.get = function(req, res) {
 
     db.query(query, [req.session.user.id], function(error, result) {
         if (error) throw error;
+        // for (var i = 0, l = result.length; i < l; i++) {
+        //     result[i].users = api.getThreadUsers(result[i].id)
+        // };
         res.json(result);
     });
 };
@@ -26,14 +31,15 @@ Threads.prototype.search = function(req, res) {
         start = parseInt(q.start, 10),
         limit = parseInt(q.limit, 10),
         query = [
-        'SELECT',
-        'threads.id, threads.name,',
-        'userThreads.isGranted, userThreads.isAdmin',
-        'FROM threads, userThreads',
-        'WHERE threads.id = userThreads.threadId',
-        'AND threads.name LIKE ?',
-        'LIMIT ?, ?'
-    ].join(' ');
+            'SELECT',
+            'threads.id, threads.name,',
+            '(SELECT isGranted FROM userThreads WHERE threadId = threads.id AND userId = 21) as isGranted,',
+            '(SELECT isAdmin FROM userThreads WHERE threadId = threads.id AND userId = 21) as isAdmin',
+            'FROM threads, userThreads',
+            'WHERE threads.id = userThreads.threadId',
+            'AND threads.name LIKE ?',
+            'LIMIT ?, ?'
+        ].join(' ');
 
     db.query(query, [search, start, limit], function(error, result) {
         if (error) throw error;

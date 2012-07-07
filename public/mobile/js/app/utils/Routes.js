@@ -10,11 +10,13 @@ Ext.define('Tz.utils.Routes', {
 
     config: {
         user: '/api/user',
+        users: '/api/users',
         login: '/api/user/login',
         register: '/api/user/register',
         threads: '/api/threads',
         messages: '/api/threads/messages',
-        threadsSearch: '/api/threads/search'
+        threadsSearch: '/api/threads/search',
+        sendDeviceToken: '/api/user/token'
     },
 
     constructor: function(config) {
@@ -22,6 +24,10 @@ Ext.define('Tz.utils.Routes', {
     },
 
     applyUser: function(newValue, oldValue) {
+        return Tz.utils.Config.getHost() + newValue;
+    },
+
+    applyUsers: function(newValue, oldValue) {
         return Tz.utils.Config.getHost() + newValue;
     },
 
@@ -42,6 +48,10 @@ Ext.define('Tz.utils.Routes', {
     },
 
     applyThreadsSearch: function(newValue, oldValue) {
+        return Tz.utils.Config.getHost() + newValue;
+    },
+
+    applySendDeviceToken: function(newValue, oldValue) {
         return Tz.utils.Config.getHost() + newValue;
     }
 

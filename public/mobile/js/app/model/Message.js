@@ -8,7 +8,8 @@ Ext.define('Tz.model.Message', {
             'text',
             'email',
             'threadId',
-            {name: 'creationDate', type: 'date'/*, defaultValue: new Date()*/}
+            {name: 'creationDate', type: 'date'},
+            {name: 'picture', defaultValue: 'http://placehold.it/70x70'}
         ]
     }
 

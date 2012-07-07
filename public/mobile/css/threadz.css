@@ -9781,12 +9781,23 @@ input[type="search"]::-webkit-search-cancel-button {
 .tz_messages .x-list-item-label {
   display: -webkit-box;
 }
-/* line 11, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
+/* line 7, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
+.tz_messages .x-list-item-label .picture {
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+}
+/* line 13, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
 .tz_messages .x-list-item-label .info {
+  padding-left: 6px;
   -webkit-box-flex: 1;
 }
-/* line 14, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
+/* line 17, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
 .tz_messages .x-list-item-label .info .name {
   font-size: 1.2em;
   font-weight: bold;
+}
+/* line 29, ../js/lib/sencha/resources/themes/stylesheets/threadz/_message.scss */
+.tz_messages .x-list-item-label .info .message .date {
+  font-size: .6em;
 }

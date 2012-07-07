@@ -31,6 +31,7 @@ Ext.application({
     ],
 
     stores: [
+        'Users',
         'Threads',
         'Messages'
     ],
@@ -40,6 +41,7 @@ Ext.application({
         'Threads',
         'threads.Search',
         'Messages',
+        'messages.Users',
         // 'Messenger',
         'Navigation',
         'Authentication'

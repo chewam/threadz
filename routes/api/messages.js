@@ -43,7 +43,7 @@ Messages.prototype.add = function(req, res) {
             res.json(result);
             query = [
                 'SELECT userId FROM userThreads',
-                'WHERE threadId = ? AND userId != ?'
+                'WHERE threadId = ? AND userId != ? AND isGranted = 1'
             ].join(' ');
             db.query(query, [threadId, userId], function(error, users) {
                 if (error) throw error;

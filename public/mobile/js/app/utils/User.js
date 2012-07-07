@@ -97,6 +97,24 @@ Ext.define('Tz.utils.User', {
         }
     },
 
+    sendDeviceToken: function(token, callback, scope) {
+        if (token && token.length) {
+            Ext.Ajax.request({
+                scope: this,
+                params: {token: token},
+                withCredentials: true,
+                url: Tz.utils.Routes.getSendDeviceToken(),
+                success: function(response) {
+                    console.log('success', this, arguments);
+                },
+                failure: function() {
+                    console.error('failure', this, arguments);
+                    Ext.Msg.alert('Error', 'cannot reach server');
+                }
+            });
+        }
+    },
+
     logout: function(message, callback, scope) {
         Tz.utils.User.setRecord(null);
         Ext.Msg.alert('Error', message, callback, scope);

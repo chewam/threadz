@@ -36,7 +36,7 @@ Ext.define('Tz.view.threads.Search', {
                     url: Tz.utils.Routes.getThreadsSearch()
                 }
             }),
-            itemTpl: '{name}'
+            itemTpl: Tz.utils.Templates.getThreadItem()
         }],
         listeners: {
             hide: function() {

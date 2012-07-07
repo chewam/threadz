@@ -90,4 +90,26 @@ User.prototype.logout = function(req, res) {
     res.json({success: true});
 };
 
+User.prototype.token = function(req, res) {
+    var user,
+        token = req.body.token,
+        id = req.session.user.id,
+        query = 'UPDATE users SET token = ? WHERE id = ?';
+
+    if (token && token.length) {
+        db.query(query, [token, id], function(error, result) {
+            if (error) throw error;
+            console.log('token', token, result);
+            res.json({
+                success: true
+            });
+        });
+    } else {
+        res.json({
+            success: false,
+            error: 'wrong login or password'
+        });
+    }
+};
+
 module.exports = new User();

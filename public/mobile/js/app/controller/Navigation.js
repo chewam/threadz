@@ -72,15 +72,19 @@ Ext.define('Tz.controller.Navigation', {
         var messagesPanel = this.getMessagesPanel(),
             messagesStore = messagesPanel.getStore(),
             messagesProxy = messagesStore.getProxy(),
+            usersProxy = Ext.getStore('users').getProxy(),
             navigationPanel = this.getNavigationPanel(),
-            url = '/api/threads/' + threadId + '/messages';
+            usersUrl = '/api/threads/' + threadId + '/users',
+            messagesUrl = '/api/threads/' + threadId + '/messages';
 
         navigationPanel.setMasked({
             xtype: 'loadmask',
             message: 'Loading messages...'
         });
 
-        Tz.utils.Routes.setMessages(url);
+        Tz.utils.Routes.setUsers(usersUrl);
+        Tz.utils.Routes.setMessages(messagesUrl);
+        usersProxy.setUrl(Tz.utils.Routes.getUsers());
         messagesProxy.setUrl(Tz.utils.Routes.getMessages());
 
         messagesStore.load(function() {

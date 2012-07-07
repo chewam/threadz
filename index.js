@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -40,15 +39,20 @@ app.configure('production', function() {
 // API user
 app.post('/api/user/login', routes.api.user.login);
 app.post('/api/user/register', routes.api.user.register);
+app.post('/api/user/token', routes.api.user.token);
 app.get('/api/user/logout', routes.api.checkSession, routes.api.user.logout);
 app.get('/api/user', routes.api.checkSession, routes.api.user.get);
 
 // API threads
-app.get('/api/threads/:id/messages', routes.api.threads.messages.get);
-app.post('/api/threads/:id/messages', routes.api.threads.messages.add);
+app.get('/api/threads/:id/users', routes.api.checkSession, routes.api.threads.users.get);
+app.get('/api/threads/:id/messages', routes.api.checkSession, routes.api.threads.messages.get);
+app.post('/api/threads/:id/messages', routes.api.checkSession, routes.api.threads.messages.add);
 app.get('/api/threads/search', routes.api.checkSession, routes.api.threads.search);
 app.get('/api/threads', routes.api.checkSession, routes.api.threads.get);
 app.post('/api/threads', routes.api.checkSession, routes.api.threads.add);
+
+// MOBILE APP
+app.get('/app', routes.app.index);
 
 // WEB SITE
 app.get('/', routes.site.index);
