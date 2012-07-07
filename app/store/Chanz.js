@@ -12,15 +12,12 @@ Ext.define("Cz.store.Chanz", {
             id: 'chanz2',
             owner: 'user',
             access: 'private'
-            // type: 'localstorage',
-            // id: 'chanz'
         },
         listeners: {
             load: function() {
                 console.warn('chanz store load', arguments);
                 this.each(function(record) {
                     this.listenChan(record);
-                    // this.bindChannel(record);
                 }, this);
             },
             beforesync: function() {
@@ -39,10 +36,6 @@ Ext.define("Cz.store.Chanz", {
                 console.warn('chanz store refresh', arguments);
             }
         }
-    },
-
-    getChan: function(chanId) {
-
     },
 
     listenChan: function(chan) {
@@ -65,9 +58,6 @@ Ext.define("Cz.store.Chanz", {
         console.log('chan onDestroy', chan);
         this.remove(chan);
         this.sync();
-        // this.removeMessages();
-        // this.removeUsers();
-        // this.destroy();
     },
 
     onJoin: function(chan) {
@@ -84,19 +74,5 @@ Ext.define("Cz.store.Chanz", {
         console.log('chan onMessage', this);
         chan.getMessages().sync();
     }
-    // bindChannel: function(record) {
-    //     var id =  record.getChanId();
-
-    //     console.log('bindChannel', record, id);
-
-    //     Ext.io.Channel.get({name: id}, function(channel) {
-    //         channel.on({
-    //             scope: this,
-    //             message: function(sender, message) {
-    //                 console.log('channel message', message, sender);
-    //             }
-    //         });
-    //     }, this);
-    // }
 
 });

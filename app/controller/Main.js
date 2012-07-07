@@ -5,32 +5,18 @@ Ext.define('Cz.controller.Main', {
     config: {
         views: ['Navigation'],
         models: ['Chan', 'User', 'Message'],
-        stores: ['Chanz', 'UserSearch'/*, 'Users', 'Messages'*/],
+        stores: ['Chanz', 'UserSearch'],
         refs: {
             navigation: {
                 autoCreate: true,
                 xtype: 'cz_navigation',
                 selector: 'viewport > cz_navigation'
             }
-        },
-        control: {
-            
-            
-        },
-        before: {
-
-        },
-        routes: {
-            
         }
     },
 
     init: function() {
         console.log('init main');
-        // Cz.app.on({
-        //     scope: this,
-        //     message: this.onMessage
-        // });
     },
 
     launch: function() {
@@ -50,35 +36,11 @@ Ext.define('Cz.controller.Main', {
 
         console.log('onAuth', user);
         this.getApplication().currentUser = user;
-
-        Ext.getStore('chanz').sync();        
+        Ext.getStore('chanz').sync();
         this.showNavigation();
         sioController.updateButtonLogin();
         this.removeLogin();
         return true;
-        // user.on({
-        //     message: function(sender, data) {
-        //         console.warn('on IO message', this, arguments);
-        //         Ext.getStore('chanz').add({
-        //             text: data.text,
-        //             users: data.users,
-        //             messages: data.messages,
-        //             timestamp: data.timestamp
-        //         });
-        //     }
-        // });
-        // this.getApplication().currentUser = user;
-        // console.info('authorized', this, arguments);
-        // this.showNavigation();
-        // this.removeLogin();
-        // sioController.updateButtonLogin();
-        // Ext.getStore('chanz').sync(function(status) {
-        //     console.log('SYNC =>', arguments);
-        //     if (!status.created) {
-        //         console.log('LOAD =>', status.created);
-        //         Ext.getStore('chanz').load();
-        //     }
-        // });
     },
 
     onUserMessage: function(sender, message) {
@@ -136,54 +98,5 @@ Ext.define('Cz.controller.Main', {
             chan.getUsers().sync();
         }
     }
-
-    // onShare: function(data) {
-    //     var store = Ext.getStore('chanz');
-
-    //     store.add(data);
-    //     store.sync();
-    // }
-
-    // onMessage: function(message, chan) {
-    //     var messages,
-    //         currentChan = Cz.app.currentChan,
-    //         chanzStore = Ext.getStore('chanz'),
-    //         messagesStore = Ext.getStore('messages');
-
-    //     console.log('onMessage', arguments, chan, currentChan);
-
-    //     chan = chan || currentChan;
-
-    //     if (!chan) return false;
-
-    //     messages = chan.get('messages');
-    //     messages.push(message);
-    //     chan.set('messages', messages);
-
-    //     chanzStore.sync(function() {
-    //         this.warnChanUsers(message, chan);
-    //     }, this);
-
-    //     if (currentChan === chan) {
-    //         console.log('udpate current chan', currentChan);
-    //         chanzStore.add(message);
-    //     }
-    // },
-
-    // warnChanUsers: function(message, chan) {
-    //     // var chan = Cz.app.currentChan;
-    //         // messages = record.get('messages'),
-    //         // message = messages[messages.length-1];
-    //     // var user = Cz.app.currentUser;
-
-    //     message.chanId = chan.getId();        
-
-    //     console.log('dispatch message', message);
-    //     Ext.io.Channel.get({name: chan.get('text')}, function(channel) {
-    //         channel.publish({message: message}, function(error) {
-    //             console.log('publish', arguments);
-    //         });
-    //     });
-    // }
 
 });

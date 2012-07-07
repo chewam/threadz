@@ -5,36 +5,11 @@ Ext.define("Cz.model.Chan", {
     requires: ['Cz.model.User'],
 
     config: {
-        // identifier: {
-        //     type: 'uuid'
-        // },
-        // associations: [{
-        //     type: 'hasMany',
-        //     primaryKey: 'id',
-        //     model: 'Cz.model.User',
-        //     associationKey: 'users',
-        //     foreignKey: 'chan_id',
-        //     store: {
-        //         autoSync: true,
-        //         autoLoad: true,
-        //         proxy: {
-        //             // id: 'users',
-        //             // type: 'localstorage'
-        //             type: 'syncstorage',
-        //             id: 'users',
-        //             owner: 'user',
-        //             access: 'private'
-        //         }
-        //     }
-        // }],
         fields: [
             {name: 'text', type: 'string'},
             {name: 'chanId', type: 'string'},
             {name: 'adminId', type: 'string'},
             {name: 'timestamp', type: 'int'}
-            // {name: 'users', type: 'string'},
-            // {name: 'messages', type: 'string'},
-            // {name: 'isAdmin', type: 'boolean', defaultValue: false}
         ]
     },
 
@@ -99,12 +74,6 @@ Ext.define("Cz.model.Chan", {
                 users.sync(callback, scope);
             }
         });
-        // var users = this.getUsers(),
-        //     user = users.findRecord('userId', userId);
-
-        // console.log('removeUser', userId, user);
-        // users.remove(user);
-        // users.sync(callback, scope);
     },
 
     removeUsers: function() {
@@ -114,6 +83,21 @@ Ext.define("Cz.model.Chan", {
         // users.sync(function() {
         //     users.destroy();
         // });
+    },
+
+    addMessage: function(data, callback, scope) {
+        var message,
+            messages = this.getMessages();
+
+        callback = callback || Ext.emptyFn;
+
+        message = messages.add(data)[0];
+        messages.sync(function(response) {
+            if (response.r === 'ok') {
+                this.notifyUsers('message');
+                callback.call(scope || this, message);
+            }
+        }, this);
     },
 
     removeMessages: function() {
@@ -128,14 +112,6 @@ Ext.define("Cz.model.Chan", {
     notifyAdmin: function(type, callback, scope) {
         console.warn('*** notifyAdmin', arguments);
         this.notifyUser(this.get('adminId'), type, callback, scope);
-        // var message = {
-        //     type: type,
-        //     chanId: this.getChanId()
-        // };
-
-        // Ext.io.User.get({id: }, function(user) {
-        //     user.send({message: message}, callback, scope);
-        // });
     },
 
     notifyUsers: function(type, callback, scope) {

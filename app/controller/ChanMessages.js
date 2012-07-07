@@ -4,8 +4,6 @@ Ext.define('Cz.controller.ChanMessages', {
 
     config: {
         views: ['ChanMessages', 'MessagesForm'],
-        models: [],
-        stores: [],
         refs: {
             navigation: 'cz_navigation',
             chanMessages: 'cz_chanmessages'
@@ -15,35 +13,9 @@ Ext.define('Cz.controller.ChanMessages', {
                 tap: 'onAddButtonTap'
             },
             'cz_messagesform button[action="submit"]': {
-                tap: 'addMessage'
+                tap: 'onMessagesFormSubmitButtonTap'
             }
-            // chanUsers: {
-            //     activate: 'onActivate'
-            // }
-        },
-        before: {
-
-        },
-        routes: {
-
         }
-    },
-
-    init: function() {
-        console.log('init chanmessages');
-    },
-
-    launch: function() {
-        console.log('launch chanmessages');
-    },
-
-    onActivate: function(panel) {
-        // var chanId = panel.getChanId(),
-        //     store = Ext.getStore('chanz'),
-        //     record = store.getById(chanId);
-
-        // console.log('onActivate', record, panel.getStore(), chanId);
-        // panel.setStore(record.usersStore);
     },
 
     onAddButtonTap: function() {
@@ -60,55 +32,19 @@ Ext.define('Cz.controller.ChanMessages', {
         });
     },
 
-    addMessage: function(button) {
-        // var messages = [],
-        //     chan = Cz.app.currentChan,
+    onMessagesFormSubmitButtonTap: function(button) {
         var form = button.up('cz_messagesform'),
             field = form.down('textareafield'),
+            chan = this.getApplication().currentChan,
+            user = this.getApplication().currentUser,
             message = {
+                userId: user.getId(),
                 text: field.getValue(),
                 timestamp: new Date().getTime()
             };
 
-        if (message.text && message.text.length) {
-            Cz.app.fireEvent('message', message, null);
-            this.getNavigation().pop();
-        }
-
-
-        //     chanMessages = this.getChanMessages(),
-        //     store = chanMessages.getStore();
-        //     // user = Cz.app.currentUser;
-
-        // if (message && message.length) {
-        //     store.add([{
-        //         text: message,
-        //         timestamp: new Date().getTime()
-        //     }]);
-
-        //     store.each(function(record) {
-        //         messages.push(record.getData());
-        //     });
-        //     chan.set('messages', messages);
-        //     Ext.getStore('chanz').sync(function() {
-        //         this.warnChanUsers(store.last());
-        //     }, this);
-
-        //     this.getNavigation().pop();
-        // }
+        chan.addMessage(message);
+        this.getNavigation().pop();
     }
-
-    // warnChanUsers: function(message) {
-    //     var chan = Cz.app.currentChan;
-    //         // messages = record.get('messages'),
-    //         // message = messages[messages.length-1];
-        
-    //     console.log('dispatch message', message);
-    //     Ext.io.Channel.get({name: chan.get('text')}, function(channel) {
-    //         channel.publish({message: message.getData()}, function(error) {
-    //             console.log('publish', arguments);
-    //         });
-    //     });
-    // }
 
 });

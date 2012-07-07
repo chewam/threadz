@@ -16,8 +16,8 @@ Ext.application({
         'Main',
         'Chanz',
         'ChanUsers',
-        'UserSearch'
-        // 'ChanMessages'
+        'UserSearch',
+        'ChanMessages'
     ],
 
     icon: {

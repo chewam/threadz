@@ -5,6 +5,7 @@ Ext.define("Cz.model.Message", {
     config: {
         fields: [
             {name: 'text', type: 'string'},
+            {name: 'userId', type: 'string'},
             {name: 'timestamp', type: 'int'}
         ]
     }
