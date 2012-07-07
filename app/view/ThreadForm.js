@@ -1,23 +1,19 @@
-Ext.define("Cz.view.MessagesForm", {
+Ext.define("Tz.view.ThreadForm", {
 
     extend: 'Ext.form.Panel',
 
-    xtype: 'cz_messagesform',
-
-    requires: [
-        'Ext.field.TextArea'
-    ],
+    xtype: 'tz_threadform',
 
     config: {
         items: [{
             xtype: 'fieldset',
             items: [{
                 name: 'text',
-                label: 'message',
-                xtype: 'textareafield'
+                label: 'name',
+                xtype: 'textfield'
             }, {
                 action: 'submit',
-                text: 'Send',
+                text: 'add',
                 xtype: 'button'
             }]
         }]

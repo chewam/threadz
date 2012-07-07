@@ -1,16 +1,16 @@
-Ext.define('Cz.controller.ChanUsers', {
+Ext.define('Tz.controller.Users', {
 
     extend: 'Ext.app.Controller',
 
     config: {
-        views: ['ChanUsers'],
+        views: ['Users'],
         refs: {
-            navigation: 'cz_navigation',
-            chanUsers: 'cz_chanusers',
-            userSearch: 'cz_usersearch'
+            users: 'tz_users',
+            userSearch: 'tz_usersearch',
+            navigation: 'tz_navigation'
         },
         control: {
-            'cz_navigation button[action="add"]': {
+            'tz_navigation button[action="add"]': {
                 tap: 'onAddButtonTap'
             },
             userSearch: {
@@ -22,7 +22,7 @@ Ext.define('Cz.controller.ChanUsers', {
     onAddButtonTap: function() {
         var activePanel = this.getNavigation().getActiveItem();
 
-        if (activePanel.xtype === 'cz_chanusers') {
+        if (activePanel.xtype === 'tz_users') {
             this.showUserSearch();
         }
     },
@@ -30,20 +30,20 @@ Ext.define('Cz.controller.ChanUsers', {
     showUserSearch: function() {
         console.log('showUserSearch', this.getNavigation());
         this.getNavigation().push({
-            xtype: 'cz_usersearch'
+            xtype: 'tz_usersearch'
         });
     },
 
     onUserSearchItemTap: function(list, index, target, record) {
-        var chan = this.getApplication().currentChan,
+        var thread = this.getApplication().currentThread,
             data = {
-            email: record.getData().email,
-            userId: record.getData().userId,
-            name: record.getData().name,
-            timestamp: new Date().getTime()
-        };
+                email: record.getData().email,
+                userId: record.getData().userId,
+                name: record.getData().name,
+                timestamp: new Date().getTime()
+            };
 
-        chan.addUser(data);
+        thread.addUser(data);
         this.getNavigation().pop();
     }
 

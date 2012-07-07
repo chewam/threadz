@@ -4,20 +4,20 @@ Ext.Loader.setPath({
 });
 
 Ext.application({
-    name: 'Cz',
+    name: 'Tz',
 
     requires: [
         // 'Ext.MessageBox'
-        'Cz.store.Public'
+        'Tz.store.Public'
     ],
 
     controllers: [
         'Ext.io.Controller',
         'Main',
-        'Chanz',
-        'ChanUsers',
-        'UserSearch',
-        'ChanMessages'
+        'Users',
+        'Threads',
+        'Messages',
+        'UserSearch'
     ],
 
     icon: {
@@ -45,10 +45,12 @@ Ext.application({
         io: {
             // authOnStartup: false,
             // manualLogin: true,
-            logLevel: 'info',
-            // logLevel: 'error',
-            appId: "CXFd0Z2ccKaoySGP29smEEVd98C",
-            appSecret: "9405rg963AuFxmWE"
+            // logLevel: 'info',
+            logLevel: 'error',
+            appSecret: 'wUXeRN2Lmv8khtnX',
+            appId: 'OQWsUES12qzDcQTddvT4ffz1mwy'
+            // appId: "CXFd0Z2ccKaoySGP29smEEVd98C",
+            // appSecret: "9405rg963AuFxmWE"
         }
     },
 

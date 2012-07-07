@@ -1,17 +1,12 @@
-Ext.define("Cz.model.User", {
+Ext.define("Tz.model.User", {
 
     extend: 'Ext.data.Model',
 
     config: {
-        // identifier: {
-        //     type: 'uuid'
-        // },
         fields: [
-            {name: 'userId', type: 'string'},
             {name: 'name', type: 'string'},
-            {name: 'email', type: 'string'}
-            // {name: 'isAdmin', type: 'boolean', defaultValue: false}
-            // {name: 'chan_id', type: 'string'}
+            {name: 'email', type: 'string'},
+            {name: 'userId', type: 'string'}
         ]
     }
 

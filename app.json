@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "Cz",
+    "name": "Tz",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
@@ -128,7 +128,7 @@
         "product": "touch",
         "minVersion": 3,
         "debug": false,
-        "logger": "no"
+        "logger": "yes"
     },
 
     /**

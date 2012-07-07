@@ -1,8 +1,8 @@
-Ext.define("Cz.view.ChanMessages", {
+Ext.define("Tz.view.Messages", {
 
     extend: 'Ext.List',
 
-    xtype: 'cz_chanmessages',
+    xtype: 'tz_messages',
 
     config: {
         ui: 'round',

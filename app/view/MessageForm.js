@@ -1,11 +1,11 @@
-Ext.define("Cz.view.ChanzForm", {
+Ext.define("Tz.view.MessageForm", {
 
     extend: 'Ext.form.Panel',
 
-    xtype: 'cz_chanzform',
+    xtype: 'tz_messageform',
 
     requires: [
-
+        'Ext.field.TextArea'
     ],
 
     config: {
@@ -13,11 +13,11 @@ Ext.define("Cz.view.ChanzForm", {
             xtype: 'fieldset',
             items: [{
                 name: 'text',
-                label: 'name',
-                xtype: 'textfield'
+                label: 'message',
+                xtype: 'textareafield'
             }, {
                 action: 'submit',
-                text: 'add',
+                text: 'Send',
                 xtype: 'button'
             }]
         }]

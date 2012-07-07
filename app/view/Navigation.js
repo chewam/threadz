@@ -1,6 +1,6 @@
-Ext.define('Cz.view.Navigation', {
+Ext.define('Tz.view.Navigation', {
 
-    xtype: 'cz_navigation',
+    xtype: 'tz_navigation',
 
     extend: 'Ext.NavigationView',
 
@@ -21,13 +21,8 @@ Ext.define('Cz.view.Navigation', {
             }]
         },
         items: [{
-            xtype: 'cz_chanz'
+            xtype: 'tz_threads'
         }]
     }
-
-    // pop: function() {
-    //     this.fireEvent('beforepop', this, this.getPreviousItem(), this.getActiveItem());
-    //     this.callParent(arguments);
-    // }
 
 });

@@ -1,8 +1,8 @@
-Ext.define("Cz.store.Public", {
+Ext.define("Tz.store.Public", {
 
     extend: 'Ext.data.Store',
 
-    xtype: 'cz_publicstore',
+    xtype: 'tz_publicstore',
 
     config: {
         autoLoad: true,

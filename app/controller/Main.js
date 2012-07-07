@@ -1,22 +1,18 @@
-Ext.define('Cz.controller.Main', {
+Ext.define('Tz.controller.Main', {
 
     extend: 'Ext.app.Controller',
 
     config: {
         views: ['Navigation'],
-        models: ['Chan', 'User', 'Message'],
-        stores: ['Chanz', 'UserSearch'],
+        models: ['Thread', 'User', 'Message'],
+        stores: ['Threads', 'UserSearch'],
         refs: {
             navigation: {
                 autoCreate: true,
-                xtype: 'cz_navigation',
-                selector: 'viewport > cz_navigation'
+                xtype: 'tz_navigation',
+                selector: 'viewport > tz_navigation'
             }
         }
-    },
-
-    init: function() {
-        console.log('init main');
     },
 
     launch: function() {
@@ -36,7 +32,7 @@ Ext.define('Cz.controller.Main', {
 
         console.log('onAuth', user);
         this.getApplication().currentUser = user;
-        Ext.getStore('chanz').sync();
+        Ext.getStore('threads').sync();
         this.showNavigation();
         sioController.updateButtonLogin();
         this.removeLogin();
@@ -53,7 +49,7 @@ Ext.define('Cz.controller.Main', {
     },
 
     onLogout: function() {
-        var store = Ext.getStore('chanz'),
+        var store = Ext.getStore('threads'),
             sioController = this.getApplication().sio;
 
         console.log('logout', this, arguments);
@@ -78,7 +74,7 @@ Ext.define('Cz.controller.Main', {
     },
 
     onAdd: function(data) {
-        var store = Ext.getStore('chanz');
+        var store = Ext.getStore('threads');
 
         store.add(data);
 
@@ -91,11 +87,11 @@ Ext.define('Cz.controller.Main', {
     },
 
     onQuit: function(data) {
-        var store = Ext.getStore('chanz'),
-            chan = store.findRecord('id', data.chanId);
+        var store = Ext.getStore('threads'),
+            thread = store.findRecord('id', data.threadId);
 
-        if (chan) {
-            chan.getUsers().sync();
+        if (thread) {
+            thread.getUsers().sync();
         }
     }
 

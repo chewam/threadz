@@ -1,11 +1,10 @@
-Ext.define('Cz.view.chanz.Item', {
+Ext.define('Tz.view.threads.Item', {
 
     extend: 'Ext.dataview.component.DataItem',
 
-    xtype: 'cz_chanz_item',
+    xtype: 'tz_threads_item',
 
     config: {
-        // nameButton: true,
         details: true,
         actions: {
             docked: 'bottom',
@@ -71,21 +70,21 @@ Ext.define('Cz.view.chanz.Item', {
     }
 });
 
-Ext.define("Cz.view.Chanz", {
+Ext.define("Tz.view.Threads", {
 
     extend: 'Ext.DataView',
 
-    xtype: 'cz_chanz',
+    xtype: 'tz_threads',
 
     requires: [
-        // 'Cz.store.Chanz'
+        // 'Tz.storethreadsChanz'
     ],
 
     config: {
         // ui: 'round',
-        store: 'chanz',
+        store: 'threads',
         useComponents: true,
-        defaultType: 'cz_chanz_item'
+        defaultType: 'tz_threads_item'
     }
 
 });

@@ -1,49 +1,49 @@
-Ext.define("Cz.model.Chan", {
+Ext.define("Tz.model.Thread", {
 
     extend: 'Ext.data.Model',
 
-    requires: ['Cz.model.User'],
+    requires: ['Tz.model.User'],
 
     config: {
         fields: [
-            {name: 'text', type: 'string'},
-            {name: 'chanId', type: 'string'},
+            {name: 'name', type: 'string'},
+            {name: 'threadId', type: 'string'},
             {name: 'adminId', type: 'string'},
             {name: 'timestamp', type: 'int'}
         ]
     },
 
     toUrl: function() {
-        console.log('Chan toUrl', 'chan/' + this.getId());
-        return 'chan/' + this.getId();
+        console.log('Thread toUrl', 'thread/' + this.getId());
+        return 'thread/' + this.getThreadId();
     },
 
-    getChanId: function() {
-        return this.get('chanId') || this.getId();
+    getThreadId: function() {
+        return this.get('threadId') || this.getId();
     },
 
     getUsers: function() {
-        var storeId = this.getChanId() + '-users',
+        var storeId = this.getThreadId() + '-users',
             store = Ext.getStore(storeId);
 
         console.log('getUsers', storeId);
         return store || Ext.getStore({
             storeId: storeId,
             proxy: {id: storeId},
-            model: 'Cz.model.User',
-            xtype: 'cz_publicstore'
+            model: 'Tz.model.User',
+            xtype: 'tz_publicstore'
         });
     },
 
     getMessages: function() {
-        var storeId = this.getChanId() + '-messages',
+        var storeId = this.getThreadId() + '-messages',
             store = Ext.getStore(storeId);
 
         return store || Ext.getStore({
             storeId: storeId,
             proxy: {id: storeId},
-            model: 'Cz.model.Message',
-            xtype: 'cz_publicstore'
+            model: 'Tz.model.Message',
+            xtype: 'tz_publicstore'
         });
     },
 
@@ -54,6 +54,7 @@ Ext.define("Cz.model.Chan", {
         callback = callback || Ext.emptyFn;
 
         user = users.add(data)[0];
+
         users.sync(function(response) {
             if (response.r === 'ok') {
                 this.notifyUser(data.userId, 'add');
@@ -118,10 +119,10 @@ Ext.define("Cz.model.Chan", {
         console.warn('*** notifyUsers', arguments);
         var message = {
             type: type,
-            chanId: this.getChanId()
+            threadId: this.getThreadId()
         };
 
-        Ext.io.Channel.get({name: this.getChanId()}, function(channel) {
+        Ext.io.Channel.get({name: this.getThreadId()}, function(channel) {
             channel.publish({message: message}, callback || Ext.emptyFn, scope);
         });
     },
@@ -132,7 +133,7 @@ Ext.define("Cz.model.Chan", {
             type: type,
             data: {
                 text: this.get('text'),
-                chanId: this.getChanId(),
+                threadId: this.getThreadId(),
                 adminId: this.get('adminId'),
                 timestamp: this.get('timestamp')
             }

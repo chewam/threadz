@@ -1,8 +1,8 @@
-Ext.define("Cz.view.UserSearch", {
+Ext.define("Tz.view.UserSearch", {
 
     extend: 'Ext.List',
 
-    xtype: 'cz_usersearch',
+    xtype: 'tz_usersearch',
 
     requires: [
         'Ext.Toolbar',

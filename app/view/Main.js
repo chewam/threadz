@@ -1,9 +1,12 @@
-Ext.define("Cz.view.Main", {
+Ext.define("Tz.view.Main", {
+
     extend: 'Ext.tab.Panel',
+
     requires: [
         'Ext.TitleBar',
         'Ext.Video'
     ],
+
     config: {
         tabBarPosition: 'bottom',
 

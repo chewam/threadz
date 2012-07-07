@@ -1,17 +1,10 @@
-Ext.define("Cz.store.UserSearch", {
+Ext.define("Tz.store.UserSearch", {
 
     extend: 'Ext.data.Store',
 
     config: {
-        // autoLoad: true,
         storeId: 'usersearch',
-        model: 'Cz.model.User'
-        // proxy: {
-        //     type: 'syncstorage',
-        //     id: 'usersx',
-        //     owner: 'user',
-        //     access: 'private'
-        // }
+        model: 'Tz.model.User'
     }
 
 });

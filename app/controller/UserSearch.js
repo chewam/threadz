@@ -1,4 +1,4 @@
-Ext.define('Cz.controller.UserSearch', {
+Ext.define('Tz.controller.UserSearch', {
 
     extend: 'Ext.app.Controller',
 
@@ -6,38 +6,15 @@ Ext.define('Cz.controller.UserSearch', {
         group: null,
         timer: null,
         views: ['UserSearch'],
-        models: [],
-        stores: [],
         refs: {
-            userList: 'cz_usersearch'
+            userList: 'tz_usersearch'
         },
         control: {
-            // userList: {
-            //     activate: 'onActivate'
-            // },
-            'cz_usersearch searchfield': {
+            'tz_usersearch searchfield': {
                 keyup: 'onSearchFieldKeyup'
             }
-        },
-        before: {
-
-        },
-        routes: {
-
         }
     },
-
-    init: function() {
-        console.log('init usersearch');
-    },
-
-    launch: function() {
-        console.log('launch usersearch');
-    },
-
-    // onActivate: function(panel) {
-    //     console.log('activate usersearch');
-    // },
 
     search: function(query) {
         var group = this.getGroup(),

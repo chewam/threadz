@@ -1,4 +1,4 @@
-Ext.define("Cz.model.Message", {
+Ext.define("Tz.model.Message", {
 
     extend: 'Ext.data.Model',
 
