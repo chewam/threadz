@@ -9,7 +9,11 @@ Ext.define("Tz.model.Thread", {
             {name: 'name', type: 'string'},
             {name: 'threadId', type: 'string'},
             {name: 'adminId', type: 'string'},
-            {name: 'timestamp', type: 'int'}
+            {name: 'timestamp', type: 'int'},
+            {name: 'userCount', type: 'int', defaultValue: 0},
+            {name: 'messageCount', type: 'int', defaultValue: 0},
+            {name: 'unknownUserCount', type: 'int', defaultValue: 0},
+            {name: 'unreadMessageCount', type: 'int', defaultValue: 0}
         ]
     },
 
@@ -31,7 +35,13 @@ Ext.define("Tz.model.Thread", {
             storeId: storeId,
             proxy: {id: storeId},
             model: 'Tz.model.User',
-            xtype: 'tz_publicstore'
+            xtype: 'tz_publicstore',
+            listeners: {
+                scope: this,
+                load: function(store) {
+                    this.updateUserCount(store.getCount());
+                }
+            }
         });
     },
 
@@ -43,7 +53,13 @@ Ext.define("Tz.model.Thread", {
             storeId: storeId,
             proxy: {id: storeId},
             model: 'Tz.model.Message',
-            xtype: 'tz_publicstore'
+            xtype: 'tz_publicstore',
+            listeners: {
+                scope: this,
+                load: function(store) {
+                    this.updateMessageCount(store.getCount());
+                }
+            }
         });
     },
 
@@ -132,7 +148,7 @@ Ext.define("Tz.model.Thread", {
         var message = {
             type: type,
             data: {
-                text: this.get('text'),
+                name: this.get('name'),
                 threadId: this.getThreadId(),
                 adminId: this.get('adminId'),
                 timestamp: this.get('timestamp')
@@ -142,6 +158,20 @@ Ext.define("Tz.model.Thread", {
         Ext.io.User.get({id: userId}, function(user) {
             user.send({message: message}, callback || Ext.emptyFn, scope);
         });
+    },
+
+    updateUserCount: function(count) {
+        if (count !== this.get('userCount')) {
+            this.set('userCount', count);
+            Ext.getStore('threads').sync();
+        }
+    },
+
+    updateMessageCount: function(count) {
+        if (count !== this.get('messageCount')) {
+            this.set('messageCount', count);
+            Ext.getStore('threads').sync();
+        }
     }
 
 });

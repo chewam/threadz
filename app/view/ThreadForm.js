@@ -8,8 +8,8 @@ Ext.define("Tz.view.ThreadForm", {
         items: [{
             xtype: 'fieldset',
             items: [{
-                name: 'text',
-                label: 'name',
+                name: 'name',
+                placeHolder: 'Name',
                 xtype: 'textfield'
             }, {
                 action: 'submit',

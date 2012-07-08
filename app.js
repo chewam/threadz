@@ -8,7 +8,8 @@ Ext.application({
 
     requires: [
         // 'Ext.MessageBox'
-        'Tz.store.Public'
+        'Tz.store.Public',
+        'Tz.utils.Templates'
     ],
 
     controllers: [

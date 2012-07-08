@@ -13,7 +13,7 @@ Ext.define("Tz.view.MessageForm", {
             xtype: 'fieldset',
             items: [{
                 name: 'text',
-                label: 'message',
+                placeHolder: 'Message',
                 xtype: 'textareafield'
             }, {
                 action: 'submit',

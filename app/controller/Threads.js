@@ -80,7 +80,7 @@ Ext.define('Tz.controller.Threads', {
         var user = this.getApplication().currentUser,
             data = {
                 adminId: user.getId(),
-                text: field.getValue(),
+                name: field.getValue(),
                 timestamp: new Date().getTime()
             };
 

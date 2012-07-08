@@ -41,14 +41,14 @@ Ext.define("Tz.store.Threads", {
     addThreadListener: function(thread) {
         var id =  thread.getThreadId();
 
-        console.error('listenChan', thread, id);
+        console.error('addThreadListener', thread, id);
 
         Ext.io.Channel.get({name: id}, function(channel) {
             channel.on({
                 scope: this,
                 message: function(sender, message) {
-                    console.log('channel message', message, sender, chan.getThreadId());
-                    this['on' + Ext.String.capitalize(message.type)](chan);
+                    console.log('channel message', message, sender, thread.getThreadId());
+                    this['on' + Ext.String.capitalize(message.type)](thread);
                 }
             });
         }, this);

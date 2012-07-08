@@ -5,8 +5,8 @@ Ext.define('Tz.controller.Messages', {
     config: {
         views: ['Messages', 'MessageForm'],
         refs: {
-            navigation: 'tz_navigation',
-            chanMessages: 'tz_messages'
+            navigation: 'tz_navigation'
+            // messages: 'tz_messages'
         },
         control: {
             'tz_navigation button[action="add"]': {

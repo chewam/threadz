@@ -28,7 +28,7 @@ Ext.define('Tz.view.threads.Item', {
         },
         dataMap: {
             getDetails: {
-                setHtml: 'text'
+                setHtml: 'name'
             }
         }
     },
@@ -60,12 +60,20 @@ Ext.define('Tz.view.threads.Item', {
     },
 
     updateRecord: function(record) {
-        var actions = this.getActions();
+        var text, action, tplName,
+            actions = this.getActions();
 
         this.callParent(arguments);
 
         actions.query('button').forEach(function(button) {
+            action = Ext.String.capitalize(button.action),
+            tplName = 'Thread' + action + 'Button',
+            tpl = Tz.utils.Templates['get' + tplName](),
+            text = tpl.apply(record.getData());
+
             button.setRecord(record);
+            button.setText(text);
+            console.log('BUTTON', button);
         });
     }
 });
@@ -76,12 +84,7 @@ Ext.define("Tz.view.Threads", {
 
     xtype: 'tz_threads',
 
-    requires: [
-        // 'Tz.storethreadsChanz'
-    ],
-
     config: {
-        // ui: 'round',
         store: 'threads',
         useComponents: true,
         defaultType: 'tz_threads_item'
