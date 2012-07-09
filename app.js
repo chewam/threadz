@@ -6,14 +6,26 @@ Ext.Loader.setPath({
 Ext.application({
     name: 'Tz',
 
+    viewport: {
+        autoMaximize: true,
+        layout: {
+            type: 'card',
+            animation: {
+                type: 'flip',
+                direction: 'left'
+            }
+        }
+    },
+
     requires: [
-        // 'Ext.MessageBox'
+        'Ext.MessageBox',
         'Tz.store.Public',
         'Tz.utils.Templates'
     ],
 
     controllers: [
-        'Ext.io.Controller',
+        'Ext.io.Controller',    
+        'Authenticate',
         'Main',
         'Users',
         'Threads',
@@ -46,10 +58,11 @@ Ext.application({
         io: {
             // authOnStartup: false,
             // manualLogin: true,
-            // logLevel: 'info',
-            logLevel: 'error',
+            logLevel: 'info',
+            // logLevel: 'error',
             appSecret: 'wUXeRN2Lmv8khtnX',
             appId: 'OQWsUES12qzDcQTddvT4ffz1mwy'
+            // authenticationView: 'Tz.view.Authenticate'
             // appId: "CXFd0Z2ccKaoySGP29smEEVd98C",
             // appSecret: "9405rg963AuFxmWE"
         }

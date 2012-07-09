@@ -123,7 +123,7 @@ Ext.define('Ext.io.Controller', {
     'Ext.io.Io',
     'Ext.io.User',
     'Ext.io.data.Proxy',
-    "Ext.io.ux.Authenticate",
+    // "Ext.io.ux.Authenticate",
     "Ext.io.ux.AuthFacebook"
     ],
 
@@ -179,7 +179,8 @@ Ext.define('Ext.io.Controller', {
              * To provide a custom auth screen see {Ext.io.ux.Authenticate} for required interface.
              * @accessor
              */
-            authenticationView: "Ext.io.ux.Authenticate",
+            // authenticationView: "Ext.io.ux.Authenticate",
+            authenticationView: "Tz.view.Authenticate",
 
 
             control: {
@@ -441,15 +442,20 @@ Ext.define('Ext.io.Controller', {
         * @param {Boolean} noReset
         */
         showLogin: function(noReset) {
+            console.log('showLogin', arguments, this.loginPanel);
             if (!this.loginPanel) {
+                console.log('createLogin');
                 this.createLogin();
             } else {
                 if(noReset !== true){
-                    this.loginPanel.resetForm();  
+                    console.log('resetForm');
+                    this.loginPanel.resetForm();
                 }
             }
             this.previousActiveItem = Ext.Viewport.getActiveItem();
+            console.log('previousActiveItem', this.previousActiveItem.xtype, Ext.Viewport.getItems().items, Ext.Viewport.getItems().length);
             Ext.Viewport.setActiveItem(this.loginPanel);
+            console.log('add to viewport');
         },
         
         
@@ -478,6 +484,7 @@ Ext.define('Ext.io.Controller', {
          * @param {Object} auth
          */
         onLoginUser: function(auth) {
+            console.log('onLoginUser', arguments);
             Ext.io.User.authenticate(
                 auth,
                 function(user,errors) {
@@ -486,6 +493,7 @@ Ext.define('Ext.io.Controller', {
                     } else {
                         this.showLogin(true); //make sure the login exists before we attempt to show errors.
                         //edge case that hopefuly won't happen in production 
+                        console.warn('login', this.loginPanel, this.loginPanel.showLoginErrors);
                         this.loginPanel.showLoginErrors();
                     }
                 },
@@ -527,6 +535,7 @@ Ext.define('Ext.io.Controller', {
          * @private
          */
         hideLogin: function() {
+            console.log('hideLogin');
             if (this.previousActiveItem) {
                 Ext.Viewport.setActiveItem(this.previousActiveItem);
                 delete this.previousActiveItem;

@@ -4,13 +4,18 @@ Ext.define('Tz.controller.Main', {
 
     config: {
         views: ['Navigation'],
-        models: ['Thread', 'User', 'Message'],
         stores: ['Threads', 'UserSearch'],
+        models: ['Thread', 'User', 'Message'],
         refs: {
             navigation: {
                 autoCreate: true,
                 xtype: 'tz_navigation',
                 selector: 'viewport > tz_navigation'
+            },
+            authenticate: {
+                autoCreate: true,
+                xtype: 'tz_authenticate',
+                selector: 'viewport > tz_authenticate'
             }
         }
     },
@@ -23,9 +28,21 @@ Ext.define('Tz.controller.Main', {
             scope: this,
             logout: this.onLogout,
             authorized: this.onAuth,
+            // nouser: this.onUserNotFound,
             usermessage: this.onUserMessage
         });
     },
+
+    // showAuthenticate: function() {
+    //     var navigation = this.getNavigation(),
+    //         authenticate = this.getAuthenticate();
+
+    //     Ext.Viewport.add(authenticate);
+    // },
+
+    // onUserNotFound: function() {
+    //     this.showAuthenticate();
+    // },
 
     onAuth: function(user) {
         var sioController = this.getApplication().sio;
@@ -35,7 +52,8 @@ Ext.define('Tz.controller.Main', {
         Ext.getStore('threads').sync();
         this.showNavigation();
         sioController.updateButtonLogin();
-        this.removeLogin();
+        // this.hideLogin();
+        // this.removeLogin();
         return true;
     },
 
@@ -59,6 +77,10 @@ Ext.define('Tz.controller.Main', {
         return true;
     },
 
+    // hideLogin: function() {
+
+    // },
+
     removeLogin: function() {
         var loginPanel = this.getApplication().sio.loginPanel;
 
@@ -71,6 +93,7 @@ Ext.define('Tz.controller.Main', {
         var navigation = this.getNavigation();
 
         Ext.Viewport.add(navigation);
+        Ext.Viewport.setActiveItem(navigation);
     },
 
     onAdd: function(data) {
